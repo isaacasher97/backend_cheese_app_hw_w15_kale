@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
     })
 });
 
-//CHEESE INDEX ROUTE - GET
+//CHEESE INDEX ROUTE - GET (gets all cheese)
 app.get('/cheese', async (req, res) => {
     try {
         res.json(await Cheese.find({}))
@@ -54,12 +54,21 @@ app.get('/cheese', async (req, res) => {
     }
 });
 
-//CHEESE CREATE ROUTE - POST
+//CHEESE CREATE ROUTE - POST - create a new cheese
 app.post("/cheese", async (req, res) => {
     try{
         res.json(await Cheese.create(req.body))
     } catch (error) {
         res.status(400).json(error)
+    }
+});
+
+//CHEESE SHOW ROUTE - GET - get a single cheese
+app.get("/cheese/:id", async (req, res) => {
+    try {
+        res.json(await Cheese.findById(req.params.id))
+    } catch (error) {
+        res.status(400).json(error);
     }
 });
 
