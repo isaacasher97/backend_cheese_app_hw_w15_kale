@@ -81,7 +81,16 @@ app.put("/cheese/:id", async (req, res) => {
     } catch (error) {
         res.status(400).json({ error });
     }
-})
+});
+
+//CHEESE DESTROY/DELETE ROUTE - delete a single cheese
+app.delete("/cheese/:id", async (req, res) => {
+    try {
+        res.json(await Cheese.findByIdAndRemove(req.params.id));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+}) 
 
 //Listener
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`))
