@@ -50,7 +50,7 @@ app.get('/cheese', async (req, res) => {
     try {
         res.json(await Cheese.find({}))
     } catch (error) {
-        res.status(400).json(error);
+        res.status(400).json({ error });
     }
 });
 
@@ -59,7 +59,7 @@ app.post("/cheese", async (req, res) => {
     try{
         res.json(await Cheese.create(req.body))
     } catch (error) {
-        res.status(400).json(error)
+        res.status(400).json({ error });
     }
 });
 
@@ -68,9 +68,20 @@ app.get("/cheese/:id", async (req, res) => {
     try {
         res.json(await Cheese.findById(req.params.id))
     } catch (error) {
-        res.status(400).json(error);
+        res.status(400).json({ error });
     }
 });
+
+//CHEESE UPDATE ROUTE - PUT - update a single cheese
+app.put("/cheese/:id", async (req, res) => {
+    try {
+        res.json(await Cheese.findByIdAndUpdate(req.params.id, req.body, {
+         new: true,
+        }))
+    } catch (error) {
+        res.status(400).json({ error });
+    }
+})
 
 //Listener
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`))
