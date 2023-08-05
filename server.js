@@ -41,7 +41,7 @@ app.use(express.json())// for parsing json bodies
 //test route
 app.get('/', (req, res) => {
     res.json({
-        "hello": "world"
+        "hello": "world!"
     })
 });
 
